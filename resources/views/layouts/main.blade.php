@@ -21,7 +21,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Soft UI Dashboard by Creative Tim
+    {{ $title }} | Project TA Merang
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -37,6 +37,14 @@
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js" charset="utf-8"></script>
+
+    <style>
+        table tr td {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -183,6 +191,94 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{ asset('soft-ui/js/soft-ui-dashboard.min.js?v=1.0.7') }}"></script>
+
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
+
+  <script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyCg5YGHuFqkTR6OcPcZoWAet6n_HNvJsXY",
+        authDomain: "project-ta-merang.firebaseapp.com",
+        databaseURL: "https://project-ta-merang-default-rtdb.firebaseio.com",
+        projectId: "project-ta-merang",
+        storageBucket: "project-ta-merang.appspot.com",
+        messagingSenderId: "170076542789",
+        appId: "1:170076542789:web:8571a8a28d37d6a81dd02c",
+        measurementId: "G-7HEMXRX7MJ"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    $(document).ready(function () {
+        var database = firebase.database();
+
+        database.ref('Kontrol').on("value", function (snap) {
+            kipas = snap.val().kipas;
+            light = snap.val().light;
+            mistmaker = snap.val().mistmaker;
+
+            // KIPAS
+            if (kipas == true) {
+                $('.setTxtKipas').text('ON')
+            } else {
+                $('.setTxtKipas').text('OFF')
+            }
+
+            // LIGHT
+            if (light == true) {
+                $('.setTxtLightDimmer').text('ON')
+            } else {
+                $('.setTxtLightDimmer').text('OFF')
+            }
+
+            // MIST MAKER
+            if (mistmaker == true) {
+                $('.setTxtMistMaker').text('ON')
+            } else {
+                $('.setTxtMistMaker').text('OFF')
+            }
+        });
+
+        database.ref('Sensor').on("value", function (snap) {
+            s_kelembaban = snap.val().s_kelembaban;
+            s_ldr = snap.val().s_ldr;
+            s_ph = snap.val().s_ph;
+            s_suhu = snap.val().s_suhu;
+
+            // KELEMBABAN
+            if (s_kelembaban != null) {
+                $('.setTxtKelembaban').text(s_kelembaban+" %")
+            } else {
+                $('.setTxtKelembaban').text(0)
+            }
+
+            // LDR
+            if (s_ldr != null) {
+                $('.setTxtLDR').text(s_ldr)
+            } else {
+                $('.setTxtLDR').text(0)
+            }
+
+            // CO2
+            if (s_co2 != null) {
+                $('.setTxtPH').text(s_co2)
+            } else {
+                $('.setTxtPH').text(0)
+            }
+
+            // SUHU
+            if (s_suhu != null) {
+                $('.setTxtSuhu').text(s_suhu+" °C")
+            } else {
+                $('.setTxtSuhu').text(0)
+            }
+        });
+    });
+
+</script>
   @yield('js')
 </body>
 

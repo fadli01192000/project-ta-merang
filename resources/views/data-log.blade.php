@@ -4,40 +4,33 @@
     <div class="row">
         <h4>Data List</h4>
         <div class="mb-xl-0 mb-4 mt-2">
-            <table id="myTable" class="table table-bordered table-striped table-sm">
+            <table id="datatable" class="table table-bordered table-striped table-sm display">
                 <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>Tanggal</th>
-                        <th>Status</th>
+                        <th style="text-align: center">No.</th>
+                        <th style="text-align: center">Tanggal & Waktu</th>
+                        <th style="text-align: center">Kipas</th>
+                        <th style="text-align: center">Lampu</th>
+                        <th style="text-align: center">Mist Maker</th>
+                        <th style="text-align: center">Kelembaban</th>
+                        <th style="text-align: center">LDR</th>
+                        {{-- <th>CO2</th> --}}
+                        <th style="text-align: center">Suhu</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($data as $key => $value)
                     <tr>
-                        <td>1</td>
-                        <td>21/01/2024 00:00</td>
-                        <td>Aktif</td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $value['d_waktu'] }}</td>
+                        <td>{{ $value['d_kipas'] ? 'ON' : 'OFF' }}</td>
+                        <td>{{ $value['d_light'] ? 'ON' : 'OFF' }}</td>
+                        <td>{{ $value['d_mistmaker'] ? 'ON' : 'OFF' }}</td>
+                        <td>{{ $value['d_kelembapan'] }} %</td>
+                        <td>{{ $value['d_lux'] }}</td>
+                        <td>{{ $value['d_suhu'] }}°</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>21/01/2024 01:00</td>
-                        <td>Aktif</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>21/01/2024 02:00</td>
-                        <td>Aktif</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>21/01/2024 03:00</td>
-                        <td>Tidak Aktif</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>21/01/2024 04:00</td>
-                        <td>Aktif</td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -48,6 +41,19 @@
     <script>
         $('.li-data-log').addClass('active');
 
-        $('#myTable').DataTable();
+        $(document).ready(function() {
+            console.log('Initializing DataTable');
+            $('#datatable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Export to Excel',
+                        className: 'btn btn-success'
+                    }
+                ]
+            });
+            console.log('DataTable initialized');
+        });
     </script>
 @endsection
