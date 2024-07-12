@@ -73,6 +73,17 @@ class HomeController extends Controller
         }
         $temp_suhu = array_slice($temp_suhu, -10, 10);
 
+        // Data Array Co2
+        $temp_co2 = [];
+        if ($data) {
+            foreach ($data as $key => $value) {
+                if (isset($value['d_co2'])) {
+                    $temp_co2[] = $value['d_co2'];
+                }
+            }
+        }
+        $temp_co2 = array_slice($temp_co2, -10, 10);
+
         // Data Waktu
         $temp_waktu = [];
         if ($data) {

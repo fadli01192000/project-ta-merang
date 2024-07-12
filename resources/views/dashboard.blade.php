@@ -153,6 +153,8 @@
     <div id="c_ldr" class="mb-2" style="width:73%;height:300px;"></div>
     <h4 class="mt-3">Grafik Suhu</h4>
     <div id="c_suhu" class="mb-2" style="width:73%;height:300px;"></div>
+    <h4 class="mt-3">Grafik CO2</h4>
+    <div id="c_co2" class="mb-2" style="width:73%;height:300px;"></div>
 @endsection
 
 @section('js')
@@ -173,7 +175,7 @@
 
         // Grafik LDR
         var ldrData = @json($temp_ldr);
-        var xLabelsldr = ['Hari 1', 'Hari 2', 'Hari 3', 'Hari 4', 'Hari 5', 'Hari 6', 'Hari 7', 'Hari 8', 'Hari 9', 'Hari 10'];
+        var xLabelsldr = @json($temp_waktu);
         var g_ldr = document.getElementById('c_ldr');
 
         Plotly.newPlot(g_ldr, [{
@@ -185,12 +187,24 @@
 
         // Grafik Suhu
         var suhuData = @json($temp_suhu);
-        var xLabelsSuhu = ['Hari 1', 'Hari 2', 'Hari 3', 'Hari 4', 'Hari 5', 'Hari 6', 'Hari 7', 'Hari 8', 'Hari 9', 'Hari 10'];
+        var xLabelsSuhu = @json($temp_waktu);
         var g_suhu = document.getElementById('c_suhu');
 
         Plotly.newPlot(g_suhu, [{
             x: xLabelsSuhu,
             y: suhuData
+        }], {
+            margin: { t: 0 }
+        });
+
+        // Grafik CO2
+        var co2Data = @json($temp_co2);
+        var xLabelsco2 = @json($temp_waktu);
+        var g_ldr = document.getElementById('c_co2');
+
+        Plotly.newPlot(g_co2, [{
+            x: xLabelsco2,
+            y: co2Data
         }], {
             margin: { t: 0 }
         });

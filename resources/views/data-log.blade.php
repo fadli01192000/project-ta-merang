@@ -14,8 +14,8 @@
                         <th style="text-align: center">Mist Maker</th>
                         <th style="text-align: center">Kelembaban</th>
                         <th style="text-align: center">LDR</th>
-                        {{-- <th>CO2</th> --}}
                         <th style="text-align: center">Suhu</th>
+                        <th style="text-align: center">CO2</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +29,7 @@
                         <td>{{ $value['d_kelembapan'] }} %</td>
                         <td>{{ $value['d_lux'] }}</td>
                         <td>{{ $value['d_suhu'] }}°</td>
+                        <td>{{ $value['d_co2'] }}°</td>
                     </tr>
                     @endforeach
                 </tbody>

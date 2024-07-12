@@ -264,9 +264,9 @@
 
             // CO2
             if (s_co2 != null) {
-                $('.setTxtPH').text(s_co2)
+                $('.setTxtCo2').text(s_co2)
             } else {
-                $('.setTxtPH').text(0)
+                $('.setTxtCo2').text(0)
             }
 
             // SUHU
