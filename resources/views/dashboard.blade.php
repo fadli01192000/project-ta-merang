@@ -133,7 +133,7 @@
                     <div class="col-8">
                     <div class="numbers">
                         <p class="text-lg mb-0 text-capitalize font-weight-bold">CO2</p>
-                        <h5 class="font-weight-bolder mb-0 setTxtCo2">Loading..</h5>
+                        <h5 class="font-weight-bolder mb-0 setTxtPpm">Loading..</h5>
                     </div>
                     </div>
                     <div class="col-4 text-end">
@@ -154,7 +154,7 @@
     <h4 class="mt-3">Grafik Suhu</h4>
     <div id="c_suhu" class="mb-2" style="width:73%;height:300px;"></div>
     <h4 class="mt-3">Grafik CO2</h4>
-    <div id="c_co2" class="mb-2" style="width:73%;height:300px;"></div>
+    <div id="c_ppm" class="mb-2" style="width:73%;height:300px;"></div>
 @endsection
 
 @section('js')
@@ -198,13 +198,13 @@
         });
 
         // Grafik CO2
-        var co2Data = @json($temp_co2);
-        var xLabelsco2 = @json($temp_waktu);
-        var g_ldr = document.getElementById('c_co2');
+        var ppmData = @json($temp_ppm);
+        var xLabelsppm = @json($temp_waktu);
+        var g_ppm = document.getElementById('c_ppm');
 
-        Plotly.newPlot(g_co2, [{
-            x: xLabelsco2,
-            y: co2Data
+        Plotly.newPlot(g_ppm, [{
+            x: xLabelsppm,
+            y: ppmData
         }], {
             margin: { t: 0 }
         });

@@ -74,15 +74,15 @@ class HomeController extends Controller
         $temp_suhu = array_slice($temp_suhu, -10, 10);
 
         // Data Array Co2
-        $temp_co2 = [];
+        $temp_ppm = [];
         if ($data) {
             foreach ($data as $key => $value) {
-                if (isset($value['d_co2'])) {
-                    $temp_co2[] = $value['d_co2'];
+                if (isset($value['d_ppm'])) {
+                    $temp_ppm[] = $value['d_ppm'];
                 }
             }
         }
-        $temp_co2 = array_slice($temp_co2, -10, 10);
+        $temp_ppm = array_slice($temp_ppm, -10, 10);
 
         // Data Waktu
         $temp_waktu = [];
@@ -95,6 +95,6 @@ class HomeController extends Controller
         }
         $temp_waktu = array_slice($temp_waktu, -10, 10);
 
-        return view('dashboard', compact('title','temp_kelembapan','temp_ldr','temp_suhu','temp_waktu'));
+        return view('dashboard', compact('title','temp_kelembapan','temp_ldr','temp_suhu','temp_ppm','temp_waktu'));
     }
 }

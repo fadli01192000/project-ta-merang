@@ -29,7 +29,7 @@
                         <td>{{ $value['d_kelembapan'] }} %</td>
                         <td>{{ $value['d_lux'] }}</td>
                         <td>{{ $value['d_suhu'] }}°</td>
-                        <td>{{ $value['d_co2'] }}°</td>
+                        <td>{{ $value['d_ppm'] }}°</td>
                     </tr>
                     @endforeach
                 </tbody>

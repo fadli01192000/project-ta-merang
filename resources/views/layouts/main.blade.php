@@ -245,8 +245,20 @@
         database.ref('Sensor').on("value", function (snap) {
             s_kelembaban = snap.val().s_kelembaban;
             s_ldr = snap.val().s_ldr;
-            s_ph = snap.val().s_ph;
             s_suhu = snap.val().s_suhu;
+            s_ppm = snap.val().s_ppm;
+
+            var get_ppm = Number(s_ppm)
+            var split_ppm = get_ppm.toFixed(1);
+            var r_ppm = Number(split_ppm);
+
+            console.log(r_ppm);
+
+            var get_ldr = Number(s_ldr)
+            var split_ldr = get_ldr.toFixed(1);
+            var r_ldr = Number(split_ldr);
+
+            console.log(r_ldr);
 
             // KELEMBABAN
             if (s_kelembaban != null) {
@@ -256,17 +268,10 @@
             }
 
             // LDR
-            if (s_ldr != null) {
-                $('.setTxtLDR').text(s_ldr)
+            if (r_ldr != null) {
+                $('.setTxtLDR').text(r_ldr+" Lux")
             } else {
                 $('.setTxtLDR').text(0)
-            }
-
-            // CO2
-            if (s_co2 != null) {
-                $('.setTxtCo2').text(s_co2)
-            } else {
-                $('.setTxtCo2').text(0)
             }
 
             // SUHU
@@ -274,6 +279,13 @@
                 $('.setTxtSuhu').text(s_suhu+" °C")
             } else {
                 $('.setTxtSuhu').text(0)
+            }
+
+            // CO2
+            if (r_ppm != null) {
+                $('.setTxtPpm').text(r_ppm+" PPM")
+            } else {
+                $('.setTxtPpm').text(0)
             }
         });
     });
